@@ -10,7 +10,7 @@
     + [Class Mocking](05.class-mocking.md)
     + [mock的限制](06.mock-limit.md)
     + [strict和nice](07.stict-nice.md)
-    + [创建stub对象]()
+    + [创建stub对象](08.stub.md)
     + [放宽调用次数]()
     + [参数匹配]()
 

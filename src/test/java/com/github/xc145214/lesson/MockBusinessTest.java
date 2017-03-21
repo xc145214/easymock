@@ -15,6 +15,7 @@
 package com.github.xc145214.lesson;
 
 import org.easymock.EasyMock;
+import org.easymock.IMocksControl;
 import org.junit.Test;
 
 /**
@@ -70,5 +71,99 @@ public class MockBusinessTest {
     }
 
 
+    /**
+     *  测试案例可以通过，说明EasyMock.createNiceMock()是不检测方法的调用顺序。
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testNiceMock() throws Exception {
+        MockBusiness mockBusiness = new MockBusiness();
+        Service1 service1 = EasyMock.createNiceMock("service1",Service1.class);
+        mockBusiness.setService1(service1);
+
+        service1.method2();
+        EasyMock.expectLastCall();
+        service1.method1();
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(service1);
+        mockBusiness.executeService1();
+
+        EasyMock.verify(service1);
+    }
+
+    /**
+     *  测试案例可以通过，nick mock，record阶段可以简化
+     * @throws Exception
+     */
+    @Test
+    public void testNiceMockSimplify() throws Exception {
+
+        MockBusiness mockBusiness = new MockBusiness();
+        Service1 service1 = EasyMock.createNiceMock("service1",Service1.class);
+        mockBusiness.setService1(service1);
+
+        EasyMock.replay(service1);
+        mockBusiness.executeService1();
+
+        EasyMock.verify(service1);
+
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testWithoutControlInWrongOrder() throws Exception {
+
+        MockBusiness mockBusiness = new MockBusiness();
+        Service1 service1 = EasyMock.createStrictMock("service1",Service1.class);
+        Service2 service2 = EasyMock.createStrictMock("service2",Service2.class);
+        mockBusiness.setService1(service1);
+        mockBusiness.setService2(service2);
+
+
+        service2.method4();
+        EasyMock.expectLastCall();
+        service2.method3();
+        EasyMock.expectLastCall();
+
+
+        service1.method2();
+        EasyMock.expectLastCall();
+        service1.method1();
+        EasyMock.expectLastCall();
+
+        EasyMock.replay(service1, service2);
+        mockBusiness.executeService1And2();
+        EasyMock.verify(service1,service2);
+
+    }
+
+    @Test
+    public void testWithStrictControlInWrongOrder() throws Exception {
+        MockBusiness mockBusiness = new MockBusiness();
+        IMocksControl mockControl = EasyMock.createStrictControl();
+        Service1 service1 = mockControl.createMock("service1",Service1.class);
+        Service2 service2 = mockControl.createMock("service2",Service2.class);
+
+
+        mockBusiness.setService1(service1);
+        mockBusiness.setService2(service2);
+
+
+        service2.method3();
+        EasyMock.expectLastCall();
+
+
+        service1.method1();
+        EasyMock.expectLastCall();
+
+        EasyMock.replay();
+        mockBusiness.executeService1And2();
+        EasyMock.verify();
+    }
 }
 
