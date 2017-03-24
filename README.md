@@ -17,8 +17,8 @@
 + 高级教程
     + [Partial class mocking](11.partial-class-mocking.md)
     + [运行时返回值或者异常](12.return-value-or-exception.md)
-    + [改变同一个方法调用的行为]()
-    + [自定义参数匹配器]()
+    + [改变同一个方法调用的行为](13.change-behavior.md)
+    + [自定义参数匹配器](14.diy-args-match.md)
 
 + 最佳实践
     + [命名mock对象]()
