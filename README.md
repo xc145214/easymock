@@ -21,5 +21,5 @@
     + [自定义参数匹配器](14.diy-args-match.md)
 
 + 最佳实践
-    + [命名mock对象]()
-    + [使用 MocksControl]()
+    + [命名mock对象](15.name-mock.md)
+    + [使用 MocksControl](16.use-mockcontrol.md)
