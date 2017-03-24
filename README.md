@@ -12,10 +12,10 @@
     + [strict和nice](07.stict-nice.md)
     + [创建stub对象](08.stub.md)
     + [放宽调用次数](09.invoke-times.md)
-    + [参数匹配]()
+    + [参数匹配](10.args-match.md)
 
 + 高级教程
-    + [Partial class mocking]()
+    + [Partial class mocking](11.partial-class-mocking.md)
     + [运行时返回值或者异常]()
     + [改变同一个方法调用的行为]()
     + [自定义参数匹配器]()
